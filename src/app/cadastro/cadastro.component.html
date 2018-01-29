@@ -1,0 +1,43 @@
+<header class="jumbotron">
+    <h1 class="text-center">Cadastrar Fotos
+    </h1>
+    
+</header>
+<main class="container">
+    <div *ngIf="mensagem" class="row">
+        <div class="col-sm-7">
+            <p class="alert alert-success">{{mensagem}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <form #formCadastro="ngForm" class="col-sm-7" (ngSubmit)="salvar()">
+            <div class="form-group">
+                <label for="">Titulo</label>
+                <input #titulo="ngModel" required
+                [(ngModel)] = "foto.titulo" name="titulo" type="text" class="form-control">
+                <span *ngIf="titulo.invalid && titulo.touched" class="form-control alert-danger"> Campo Obrigatório </span>
+            </div>
+
+            <div class="form-group">
+                <label for="">URL</label>
+                <input #url="ngModel" required
+                [(ngModel)] = "foto.url" name="URL" type="text" class="form-control">
+              <span *ngIf="url.invalid && url.touched" class="form-control alert-danger"> Campo Obrigatório </span>
+            </div>
+
+            <div class="form-group">
+                <label for="">Descrição</label>
+                <textarea [(ngModel)] = "foto.descricao" name="description" class="form-control"></textarea>
+            </div>
+
+            <a routerLink="" class="btn btn-secondary">Voltar</a>
+            <button [disabled]="formCadastro.invalid" class="btn btn-primary">Salvar</button>
+
+        </form>
+        <aside *ngIf="foto.url && foto.titulo" class="col-md-5">
+            <painel titulo="{{foto.titulo}}">
+                <foto url="{{foto.url}}" titulo="{{foto.titulo}}"></foto>
+            </painel>
+        </aside>
+    </div>
+</main>
